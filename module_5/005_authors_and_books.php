@@ -28,17 +28,17 @@
            [
                'title' => 'Девять алгоритмов, которые изменили будущее',
                'author' => 'john_makkormik@example.com',
-               'publication date' => '2014'
+               'publicationDate' => '2014'
            ],
            [
                'title' => 'Идеальный программист',
                'author' => 'martin_robert@example.com',
-               'publication date' => '1996'
+               'publicationDate' => '1996'
            ],
            [
                'title' => 'Сияние',
                'author' => 'steven_king@example.com',
-               'publication date' => '1977'
+               'publicationDate' => '1977'
            ],
        ],
    ];
