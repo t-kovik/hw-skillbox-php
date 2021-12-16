@@ -2,15 +2,20 @@
     <?php
     $studentsCount = rand(1, 1000000);
     $words = ['студент', 'студента', 'студентов'];
-    $lastValueWords = str_split($studentsCount)[count(str_split($studentsCount))-1];
+    $lastValueWords = substr($studentsCount, -2);
     $wordForm = '';
 
-    switch ($lastValueWords) {
-        case 1:  $wordForm = $words[0]; break;
-        case 2:
-        case 3:
-        case 4:  $wordForm = $words[1]; break;
-        default: $wordForm = $words[2]; break;
+    if($lastValueWords > 10 && $lastValueWords < 15) {
+        $wordForm = $words[2];
+    } else {
+        $lastValueWords = substr($lastValueWords, -1);
+        if ($lastValueWords == 1) {
+            $wordForm = $words[0];
+        } elseif ($lastValueWords > 1 && $lastValueWords < 5) {
+            $wordForm = $words[1];
+        } else {
+            $wordForm = $words[2];
+        }
     }
 
     var_dump("На учёбе {$studentsCount} {$wordForm}");

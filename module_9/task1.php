@@ -1,9 +1,16 @@
+
 <pre>
    <?php
    $line = 'Student, hello!';
    $counts = [];
+   $letterArray = str_split($line);
 
-   foreach (str_split($line) as $item) {
+   for ($i = 0; $i < count($letterArray); $i++) {
+       $counts[$letterArray[$i]] = 0;
+   }
+
+
+   foreach ($letterArray as $item) {
        $counts[$item]++;
    }
 

@@ -1,12 +1,9 @@
 <pre>
     <?php
-    $city1 = 5;
-    $city1Radius = 300;
-    $city2 = 410;
-    $city2Radius = 200;
-
-    $city1Length = $city1 + $city1Radius;
-    $city2Length = $city2 + $city2Radius;
+    $city1 = rand (1, 1000);
+    $city1Radius = rand(1, 50);
+    $city2 = rand (1, 1000);
+    $city2Radius = rand(1, 100);
 
     $cars = [];
     $kms = [];
@@ -21,7 +18,7 @@
     }
 
     for ($i = 0; $i < $countCars; $i++) {
-       if(($kms[$i] >= $city1 && $kms[$i] <= $city1Length) || ($kms[$i] >= $city2 && $kms[$i] <= $city2Length)) {
+       if(($kms[$i] >= $city1 - $city1Radius && $kms[$i] <= $city1 + $city1Radius) || ($kms[$i] >= $city2 - $city2Radius && $kms[$i] <= $city2 + $city2Radius)) {
            var_dump("Машина {$cars[$i]} едет по городу на {$kms[$i]} км со скоростью не более 70");
        } else {
            var_dump("Машина {$cars[$i]} едет по шоссе на {$kms[$i]} км со скоростью не более 90");
