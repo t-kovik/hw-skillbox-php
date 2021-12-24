@@ -1,14 +1,16 @@
 <?php
 
-var_dump($_POST);
-if(! empty($_POST)) {
-    include $_SERVER['DOCUMENT_ROOT'] . '/module_11/data/users.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/module_11/data/passwords.php';
+$success = false;
+$error = false;
+if (!empty($_POST)) {
+    include $_SERVER['DOCUMENT_ROOT'] . '/data/users.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/data/passwords.php';
 
-    $success = false;
-    $error = false;
-
-    if((in_array($_POST['login'], $users)) && (in_array($_POST['password'], $passwords)) && ($users['id'] === $passwords['id'])) {
+    if (
+        (in_array($_POST['login'], $users))
+        && (in_array($_POST['password'], $passwords))
+        && array_keys($users, $_POST['login']) === array_keys($passwords, $_POST['password'])
+    ) {
         $success = true;
     } else {
         $error = true;
@@ -45,37 +47,35 @@ if(! empty($_POST)) {
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td class="left-collum-index">
-
             <h1>Возможности проекта —</h1>
             <p>Вести свои личные списки, например покупки в магазине, цели, задачи и многое другое. Делится списками с
                 друзьями и просматривать списки друзей.</p>
-
-
         </td>
         <td class="right-collum-index">
-
             <div class="project-folders-menu">
                 <ul class="project-folders-v">
-                    <li class="project-folders-v-active"><a href="/module_11/?login=yes">Авторизация</a></li>
+                    <li class="project-folders-v-active"><a href="?login=yes">Авторизация</a></li>
                     <li><a href="#">Регистрация</a></li>
                     <li><a href="#">Забыли пароль?</a></li>
                 </ul>
                 <div class="clearfix"></div>
             </div>
             <div class="index-auth">
-                <?php if ($_GET['login'] == 'yes' || $error) { ?>
+                <?php if (isset($_GET['login']) == 'yes' || $error) { ?>
                     <form action="index.php" method="post">
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td class="iat">
                                     <label for="login_id">Ваш e-mail:</label>
-                                    <input id="login_id" size="30" name="login" value="<?=$error ? htmlspecialchars($_POST['login']) : '' ?>">
+                                    <input id="login_id" size="30" name="login"
+                                           value="<?= $error ? htmlspecialchars($_POST['login']) : '' ?>">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iat">
                                     <label for="password_id">Ваш пароль:</label>
-                                    <input id="password_id" size="30" name="password" type="password" value="<?=$error ? htmlspecialchars($_POST['password']) : '';?>">
+                                    <input id="password_id" size="30" name="password" type="password"
+                                           value="<?= $error ? htmlspecialchars($_POST['password']) : ''; ?>">
                                 </td>
                             </tr>
                             <tr>
@@ -85,12 +85,12 @@ if(! empty($_POST)) {
                     </form>
                 <?php }
 
-                   if ($success) {
-                       include $_SERVER['DOCUMENT_ROOT'] . '/module_11/include/success_message.php';
-                   } elseif ($error) {
-                       include $_SERVER['DOCUMENT_ROOT'] . '/module_11/include/error_message.php';
-                   }
-                 ?>
+                if ($success) {
+                    include $_SERVER['DOCUMENT_ROOT'] . '/include/success_message.php';
+                } elseif ($error) {
+                    include $_SERVER['DOCUMENT_ROOT'] . '/include/error_message.php';
+                }
+                ?>
             </div>
 
 
